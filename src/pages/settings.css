@@ -1,0 +1,34 @@
+.eb-extensions__setting {
+  display: flex;
+  align-items: center;
+}
+.eb-extensions__settings--group {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  border-radius: 5px;
+  padding: 1.5em;
+  background-color: var(--c-bg-default);
+}
+.eb-extensions__setting-label {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--c-fg-subtle);
+  margin-left: 1em;
+}
+.eb-extensions__setting-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--c-fg-default);
+}
+.eb-extensions__settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.eb-extensions__settings-content {
+  flex-direction: column;
+  display: flex;
+  gap: 1em;
+}

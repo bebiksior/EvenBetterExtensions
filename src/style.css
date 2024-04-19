@@ -1,0 +1,179 @@
+.eb-extensions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  height: 100%;
+  overflow: auto;
+}
+
+.eb-extensions__content {
+  height: 100%;
+}
+
+.eb-extensions__content {
+  background-color: var(--c-bg-subtle);
+  border-radius: 5px;
+}
+
+.evenbetter-table-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--c-space-2);
+}
+
+.evenbetter-table-actions__select {
+  width: 5em;
+}
+
+.c-evenbetter_button {
+  font-size: var(--c-font-size-100);
+  font-weight: var(--c-font-weight-500);
+  --button-focus-color: white;
+}
+
+.c-evenbetter_button {
+  font-size: var(--c-font-size-100);
+  font-weight: var(--c-font-weight-500);
+  --button-focus-color: white;
+}
+
+[data-outline="true"][data-variant="secondary"] .c-evenbetter_button__input {
+  background-color: transparent;
+  color: var(--c-fg-secondary);
+  border: var(--c-border-width-2) solid var(--c-border-secondary);
+}
+
+.c-evenbetter_button__input:active {
+  background-color: var(--c-yellow-300) !important;
+  color: var(--c-gray-900) !important;
+}
+
+[data-block="true"] .c-button,
+[data-block="true"] .c-evenbetter_button__input {
+  width: 100%;
+}
+
+[data-variant="secondary"] .c-evenbetter_button__input {
+  background-color: var(--c-bg-secondary);
+  color: var(--c-fg-onEmphasis);
+}
+
+[data-size="small"] .c-evenbetter_button__input {
+  padding: var(--c-space-0) var(--c-space-2);
+  min-height: var(--c-space-8);
+}
+
+.c-evenbetter_button__input {
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  border: 0;
+  border-radius: var(--c-border-radius-1);
+  cursor: pointer;
+}
+
+.c-evenbetter_button__input {
+  background-color: transparent;
+  color: var(--c-fg-secondary);
+  border: var(--c-border-width-2) solid var(--c-border-secondary);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: inherit;
+  border: 0;
+  border-radius: var(--c-border-radius-1);
+  cursor: pointer;
+}
+
+.c-evenbetter_button__label {
+  display: inline-flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  justify-content: center;
+}
+
+.c-evenbetter_button__input--uninstall {
+  border-color: var(--c-fg-danger) !important;
+}
+
+.c-evenbetter_button__label--uninstall {
+  color: var(--c-fg-danger) !important;
+}
+
+.c-evenbetter_button__input--uninstall:active {
+  background-color: var(--c-fg-danger) !important;
+}
+
+.c-evenbetter_button__input--uninstall:active
+  .c-evenbetter_button__label--uninstall {
+  color: var(--c-bg-subtle) !important;
+}
+
+.c-evenbetter_button__input--update {
+  border-color: var(--c-bg-info) !important;
+}
+
+.c-evenbetter_button__label--update {
+  color: var(--c-bg-info) !important;
+}
+
+.c-evenbetter_button__input--update:active {
+  background-color: var(--c-bg-info) !important;
+}
+
+.c-evenbetter_button__input--update:active .c-evenbetter_button__label--update {
+  color: var(--c-bg-subtle) !important;
+}
+
+.eb-extensions__import-warning {
+  color: var(--c-fg-danger);
+  margin-bottom: 0.25em;
+}
+
+.eb-extensions__import {
+  margin-top: 1em;
+}
+
+.eb-extensions__modal * {
+  white-space: normal !important;
+}
+
+.eb-extensions__modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.eb-extensions__modal-description {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--c-fg-subtle);
+}
+
+.eb-extensions__modal-key {
+  color: var(--c-fg-default);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.eb-extensions__modal-value {
+  font-weight: 300;
+}
+
+.c-content[data-page^="#/extensions/"] {
+  overflow: auto;
+}
+
+.c-content[data-page="#/extensions/settings"] .eb-extensions__content {
+  padding: 1em;
+}
+
+.eb-extensions__library {
+  height: 100%;
+}
+
+.eb-extensions__setting-label b {
+  color: white;
+}

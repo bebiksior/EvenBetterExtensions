@@ -1,0 +1,21 @@
+{
+  "name": "evenbetter-extensions",
+  "version": "1.0.0",
+  "description": "Quicky install and keep updated Caido extensions",
+  "author": "bebiks <bebiks@cvssadvisor.com>",
+  "license": "CC0-1.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "bun run build.ts"
+  },
+  "dependencies": {
+    "@caido/sdk-frontend": "0.35.0",
+    "@evenbetter/evenbetter-api": "^2.3.1",
+    "bun-style-loader": "^0.4.0"
+  },
+  "devDependencies": {
+    "typescript": "5.4.3",
+    "vite": "5.2.7",
+    "@types/bun": "latest"
+  }
+}
