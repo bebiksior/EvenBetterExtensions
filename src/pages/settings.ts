@@ -1,5 +1,5 @@
-import EvenBetterAPI from "@evenbetter/evenbetter-api";
-import loadCSS from "@evenbetter/evenbetter-api/src/css";
+import EvenBetterAPI from "@bebiks/evenbetter-api";
+import loadCSS from "@bebiks/evenbetter-api/src/css";
 import settingsCSS from "./settings.css";
 import { EXTENSIONS_URL } from "../constants";
 

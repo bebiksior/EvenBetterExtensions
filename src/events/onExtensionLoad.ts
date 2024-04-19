@@ -1,4 +1,4 @@
-import { Event } from "@evenbetter/evenbetter-api/src/events/EventManager";
+import { Event } from "@bebiks/evenbetter-api/src/events/EventManager";
 
 export class OnExtensionLoad implements Event<Element> {
   private handlers: ((element: Element) => void)[] = [];

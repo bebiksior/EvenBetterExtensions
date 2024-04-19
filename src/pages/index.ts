@@ -1,10 +1,10 @@
 import { Caido } from "@caido/sdk-frontend";
-import EvenBetterAPI from "@evenbetter/evenbetter-api";
+import EvenBetterAPI from "@bebiks/evenbetter-api";
 import { escapeHTML } from "../utils";
 import extensionsManager, { Extension } from "../extensions";
 import { SettingsPageBody } from "./settings";
-import { PageOpenEvent } from "@evenbetter/evenbetter-api/src/events/onPageOpen";
-import { TableAPI } from "@evenbetter/evenbetter-api/src/components/table";
+import { PageOpenEvent } from "@bebiks/evenbetter-api/src/events/onPageOpen";
+import { TableAPI } from "@bebiks/evenbetter-api/src/components/table";
 
 export enum ExtensionSubPage {
   ALL = "all",

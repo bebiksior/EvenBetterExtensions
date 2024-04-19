@@ -1,12 +1,12 @@
 import { Caido } from "@caido/sdk-frontend";
 import { ExtensionsPage, ExtensionSubPage } from "./pages";
-import EvenBetterAPI from "@evenbetter/evenbetter-api";
+import EvenBetterAPI from "@bebiks/evenbetter-api";
 import extensionsManager from "./extensions";
 import { OnExtensionLoad } from "./events/onExtensionLoad";
 import { escapeHTML } from "./utils/index";
-import { PageOpenEvent } from "@evenbetter/evenbetter-api/src/events/onPageOpen";
+import { PageOpenEvent } from "@bebiks/evenbetter-api/src/events/onPageOpen";
 import styles from "./style.css";
-import loadCSS from "@evenbetter/evenbetter-api/src/css";
+import loadCSS from "@bebiks/evenbetter-api/src/css";
 import { CURRENT_VERSION, VERSION_CHECK_URL } from "./constants";
 
 function setDefaultValues() {
