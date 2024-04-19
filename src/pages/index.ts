@@ -110,11 +110,9 @@ const importButton = (subPage: ExtensionSubPage) => {
       const reader = new FileReader();
       reader.onload = async () => {
         try {
-          console.log("hello");
           const extension = JSON.parse(reader.result as string) as Extension;
           if (!extension) return;
 
-          console.log(extension);
           await extensionsManager.importCustomExtension(extension);
           refreshExtensionsTable(subPage);
         } catch (error) {
@@ -173,9 +171,6 @@ const refreshExtensionsTable = (subPage: ExtensionSubPage) => {
     if (installedVersion === "-") {
       version = extension.latestVersion;
     }
-
-    console.log(extension);
-    console.log(extensionsTable.getHTMLElement());
     
     extensionsTable.addRow(
       [
