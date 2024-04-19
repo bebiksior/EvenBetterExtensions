@@ -120,13 +120,6 @@ async function onCaidoLoad() {
   });
   setDefaultValues();
 
-  if (localStorage.getItem("previousPath")) {
-    setTimeout(() => {
-      Caido.navigation.goTo(localStorage.getItem("previousPath"));
-      localStorage.removeItem("previousPath");
-    }, 200);
-  }
-
   const onExtensionLoad = new OnExtensionLoad();
   EvenBetterAPI.eventManager.registerEvent("onExtensionLoad", onExtensionLoad);
 
@@ -185,6 +178,14 @@ async function onCaidoLoad() {
           "You are using an outdated version of EvenBetter Extensions. Please update to the latest version on http://github.com/bebiksior/EvenBetterExtensions.",
       });
     }
+  }
+
+  if (localStorage.getItem("previousPage")) {
+    const previousPage = localStorage.getItem("previousPage").split("#")[1];
+
+    console.log("Restoring previous path: " + previousPage);
+    Caido.navigation.goTo(previousPage);
+    localStorage.removeItem("previousPage");
   }
 }
 

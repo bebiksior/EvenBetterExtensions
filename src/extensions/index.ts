@@ -59,7 +59,7 @@ class ExtensionsManager {
     );
 
     // Reload the page to apply changes
-    localStorage.setItem("previousPath", window.location.hash);
+    localStorage.setItem("previousPage", window.location.hash);
     window.location.reload();
   }
 
@@ -80,7 +80,7 @@ class ExtensionsManager {
     );
 
     // Reload the page to apply changes
-    localStorage.setItem("previousPath", window.location.hash);
+    localStorage.setItem("previousPage", window.location.hash);
     window.location.reload();
   }
 
@@ -119,7 +119,7 @@ class ExtensionsManager {
       });
     }
 
-    localStorage.setItem("previousPath", window.location.hash);
+    localStorage.setItem("previousPage", window.location.hash);
     window.location.reload();
   }
 
