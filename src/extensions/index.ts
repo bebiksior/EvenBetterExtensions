@@ -198,9 +198,9 @@ class ExtensionsManager {
 
   async initExtensions(): Promise<Extension[]> {
     try {
-      const response = await fetch(EXTENSIONS_URL);
+      const response = await fetch(this.getExtensionsURL());
       if (!response.ok) {
-        throw new Error(`Failed to fetch extensions from ${EXTENSIONS_URL}`);
+        throw new Error(`Failed to fetch extensions from ${this.getExtensionsURL()}`);
       }
       const extensionsData = await response.json();
       const latestExtensions = extensionsData.extensions as Extension[];
@@ -248,6 +248,10 @@ class ExtensionsManager {
       style.textContent = cssCode;
       document.head.appendChild(style);
     }
+  }
+
+  getExtensionsURL(): string {
+    return localStorage.getItem("eb-extensions-url") || EXTENSIONS_URL;
   }
 
   async checkForUpdates(

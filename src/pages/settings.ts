@@ -1,6 +1,7 @@
 import EvenBetterAPI from "@evenbetter/evenbetter-api";
 import loadCSS from "@evenbetter/evenbetter-api/src/css";
 import settingsCSS from "./settings.css";
+import { EXTENSIONS_URL } from "../constants";
 
 export const SettingsPageBody = () => {
   loadCSS({ id: "eb-extensions-settings", cssText: settingsCSS.toString() });
@@ -42,6 +43,13 @@ export const SettingsPageBody = () => {
                     Show update notification: Show notification when new version of EvenBetter: Extensions is available.
                 </div>
             </div>
+            <div class="eb-extensions__setting eb-extensions__textinput-setting">
+              <div class="eb-extensions__setting-label">
+                URL to fetch extensions from.
+              </div>
+              <div class="eb-extensions__setting-textinput" data-key="extensions-url">
+              </div>
+          </div>
         </div>
     </div>
   `;
@@ -61,6 +69,26 @@ export const SettingsPageBody = () => {
       checkbox.appendChild(caidoCheckbox);
       checkbox.addEventListener("change", () => {
         localStorage.setItem(`eb-${key}`, input.checked ? "true" : "false");
+      });
+    });
+
+  bodyContent
+    .querySelectorAll(".eb-extensions__setting-textinput")
+    .forEach((textinput) => {
+      const key = textinput.getAttribute("data-key");
+      let value = localStorage.getItem(`eb-${key}`);
+      if (!value) {
+        localStorage.setItem(`eb-${key}`, EXTENSIONS_URL);
+        value = EXTENSIONS_URL;
+      }
+
+      const caidoTextinput = EvenBetterAPI.components.createTextInput("50em");
+      const input = caidoTextinput.querySelector("input") as HTMLInputElement;
+      input.value = value;
+
+      textinput.appendChild(caidoTextinput);
+      textinput.addEventListener("change", () => {
+        localStorage.setItem(`eb-${key}`, input.value);
       });
     });
 

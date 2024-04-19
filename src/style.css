@@ -164,6 +164,7 @@
 
 .c-content[data-page^="#/extensions/"] {
   overflow: auto;
+  min-width: 900px;
 }
 
 .c-content[data-page="#/extensions/settings"] .eb-extensions__content {
