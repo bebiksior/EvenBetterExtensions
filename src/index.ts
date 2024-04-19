@@ -84,9 +84,7 @@ async function checkForUpdates() {
     const latestVersion = await response.text();
 
     const latestVersionNumber = parseFloat(latestVersion.replace("v", ""));
-    const currentVersionNumber = parseFloat(
-      CURRENT_VERSION.replace("v", "")
-    );
+    const currentVersionNumber = parseFloat(CURRENT_VERSION.replace("v", ""));
 
     if (currentVersionNumber > latestVersionNumber) {
       return {
@@ -121,6 +119,13 @@ async function onCaidoLoad() {
     cssText: styles.toString(),
   });
   setDefaultValues();
+
+  if (localStorage.getItem("previousPath")) {
+    setTimeout(() => {
+      Caido.navigation.goTo(localStorage.getItem("previousPath"));
+      localStorage.removeItem("previousPath");
+    }, 200);
+  }
 
   const onExtensionLoad = new OnExtensionLoad();
   EvenBetterAPI.eventManager.registerEvent("onExtensionLoad", onExtensionLoad);
