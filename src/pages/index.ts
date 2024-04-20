@@ -32,7 +32,7 @@ export const ExtensionsPage = (subPage: ExtensionSubPage) => {
     { name: "Version", width: "9em" },
     { name: "Description", width: "30em" },
     { name: "Author", width: "9em" },
-    { name: "Actions", width: "13em" },
+    { name: "Actions", width: "14em" },
   ];
 
   const extensionsTable = EvenBetterAPI.components.createTable({
