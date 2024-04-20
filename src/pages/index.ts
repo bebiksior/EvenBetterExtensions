@@ -141,6 +141,12 @@ const refreshButton = (subPage: ExtensionSubPage) => {
   refreshButton.addEventListener("click", async () => {
     await extensionsManager.initExtensions();
     refreshExtensionsTable(subPage);
+    EvenBetterAPI.toast.showToast({
+      message: "Extensions refreshed",
+      type: "success",
+      duration: 2000,
+      position: "bottom"
+    })
   });
 
   return refreshButton;

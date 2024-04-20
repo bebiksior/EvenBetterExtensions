@@ -45,7 +45,7 @@ export const SettingsPageBody = () => {
             </div>
             <div class="eb-extensions__setting eb-extensions__textinput-setting">
               <div class="eb-extensions__setting-label">
-                URL to fetch extensions from.
+                URL to fetch extensions from:
               </div>
               <div class="eb-extensions__setting-textinput" data-key="extensions-url">
               </div>

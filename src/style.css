@@ -22,7 +22,7 @@
 }
 
 .evenbetter-table-actions__select {
-  width: 5em;
+  width: fit-content;
 }
 
 .c-evenbetter_button {
