@@ -1,9 +1,0 @@
-{
-  "id": "starterkit",
-  "name": "Example Plugin",
-  "description": "Example Plugin",
-  "author": "Caido",
-  "url":"https://github.com/caido/starterkit-plugin",
-  "versionUrl": "https://raw.githubusercontent.com/bebiksior/starterkit-plugin/main/version.txt",
-  "customJSUrl": "https://raw.githubusercontent.com/bebiksior/starterkit-plugin/main/dist/script.js"
-}

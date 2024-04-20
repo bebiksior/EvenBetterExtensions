@@ -1,0 +1,9 @@
+{
+  "id": "evenbetter_exampleplugin",
+  "name": "Example Plugin",
+  "description": "Example Plugin using EvenBetterAPI",
+  "author": "bebiks",
+  "url":"https://github.com/bebiksior/EvenBetterPluginExample",
+  "versionUrl": "https://raw.githubusercontent.com/bebiksior/EvenBetterPluginExample/main/version.txt",
+  "customJSUrl": "https://raw.githubusercontent.com/bebiksior/EvenBetterPluginExample/main/final/index.js"
+}
