@@ -159,6 +159,10 @@ class ExtensionsManager {
 
     const latestVersion = await this.fetchBody(extension.versionUrl);
     extension.latestVersion = escapeHTML(latestVersion);
+    extension.name = escapeHTML(extension.name);
+    extension.description = escapeHTML(extension.description);
+    extension.author = escapeHTML(extension.author);
+    extension.url = escapeHTML(extension.url);
 
     let customExtensions = localStorage.getItem("customExtensions");
     if (!customExtensions) {
@@ -208,6 +212,10 @@ class ExtensionsManager {
       for (const ext of latestExtensions) {
         const latestVersion = await this.fetchBody(ext.versionUrl);
         ext.latestVersion = escapeHTML(latestVersion);
+        ext.name = escapeHTML(ext.name);
+        ext.description = escapeHTML(ext.description);
+        ext.author = escapeHTML(ext.author);
+        ext.url = escapeHTML(ext.url);
       }
 
       this.extensions = latestExtensions;

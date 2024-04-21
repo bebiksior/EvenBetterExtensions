@@ -5,6 +5,7 @@ import extensionsManager, { Extension } from "../extensions";
 import { SettingsPageBody } from "./settings";
 import { PageOpenEvent } from "@bebiks/evenbetter-api/src/events/onPageOpen";
 import { TableAPI } from "@bebiks/evenbetter-api/src/components/table";
+import { CURRENT_VERSION, VERSION_CHECK_URL } from "../constants";
 
 export enum ExtensionSubPage {
   ALL = "all",
@@ -145,8 +146,8 @@ const refreshButton = (subPage: ExtensionSubPage) => {
       message: "Extensions refreshed",
       type: "success",
       duration: 2000,
-      position: "bottom"
-    })
+      position: "bottom",
+    });
   });
 
   return refreshButton;
@@ -177,7 +178,7 @@ const refreshExtensionsTable = (subPage: ExtensionSubPage) => {
     if (installedVersion === "-") {
       version = extension.latestVersion;
     }
-    
+
     extensionsTable.addRow(
       [
         {
@@ -210,7 +211,7 @@ const refreshExtensionsTable = (subPage: ExtensionSubPage) => {
                   Description
                 </div>
                 <div class="eb-extensions__modal-value">
-                  ${escapeHTML(extension.description)}
+                  ${extension.description}
                 </div>
               </div>
               <div class="eb-extensions__modal-author">
@@ -218,7 +219,7 @@ const refreshExtensionsTable = (subPage: ExtensionSubPage) => {
                   Author
                 </div>
                 <div class="eb-extensions__modal-value">
-                  ${escapeHTML(extension.author)}
+                  ${extension.author}
                 </div>
               </div>
               <div class="eb-extensions__modal-url">
@@ -226,9 +227,7 @@ const refreshExtensionsTable = (subPage: ExtensionSubPage) => {
                   URL
                 </div>
                 <div class="eb-extensions__modal-value">
-                  <a href="${escapeHTML(
-                    extension.url
-                  )}" target="_blank">${escapeHTML(extension.url)}</a>
+                  <a href="${extension.url}" target="_blank">${extension.url}</a>
                 </div>
               </div>
               

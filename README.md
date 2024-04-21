@@ -2,8 +2,6 @@
 
 `EvenBetter: Extensions` allows you to quicky install and keep updated Caido extensions.
 
-# This is DEV version, it's not fully done yet. The stable version will be out in a few days.
-
 ## Installation
 **Note**: If you are moving from EvenBetter to EvenBetterExtensions, please remove the EvenBetter Custom CSS. 
 

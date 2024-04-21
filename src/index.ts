@@ -76,43 +76,6 @@ function registerCommands() {
   Caido.commandPalette.register("eb:openExtensionsPage");
 }
 
-async function checkForUpdates() {
-  try {
-    const response = await fetch(VERSION_CHECK_URL, {
-      cache: "no-store",
-    });
-    const latestVersion = await response.text();
-
-    const latestVersionNumber = parseFloat(latestVersion.replace("v", ""));
-    const currentVersionNumber = parseFloat(CURRENT_VERSION.replace("v", ""));
-
-    if (currentVersionNumber > latestVersionNumber) {
-      return {
-        isLatest: true,
-        message: `You are using a development version: ${CURRENT_VERSION}.`,
-      };
-    }
-
-    if (latestVersion.trim() === CURRENT_VERSION) {
-      return {
-        isLatest: true,
-        message: "You are using the latest version! 🎉",
-      };
-    } else {
-      return {
-        isLatest: false,
-        message: `New EvenBetter Extensions version available: ${latestVersion}.`,
-        latestVersion: latestVersion,
-      };
-    }
-  } catch (error) {
-    return {
-      isLatest: false,
-      message: "Failed to check for updates",
-    };
-  }
-}
-
 async function onCaidoLoad() {
   loadCSS({
     id: "eb-extensions",
@@ -168,17 +131,6 @@ async function onCaidoLoad() {
     }
   });
   EvenBetterAPI.eventManager.triggerEvent("onExtensionLoad");
-
-  if (localStorage.getItem("eb-show-update-notification") === "true") {
-    const response = await checkForUpdates();
-    if (!response.isLatest) {
-      EvenBetterAPI.modal.openModal({
-        title: `EvenBetter Extensions: Update from ${CURRENT_VERSION} to ${response.latestVersion}`,
-        content:
-          "You are using an outdated version of EvenBetter Extensions. Please update to the latest version on http://github.com/bebiksior/EvenBetterExtensions.",
-      });
-    }
-  }
 
   if (localStorage.getItem("previousPage")) {
     const previousPage = localStorage.getItem("previousPage").split("#")[1];
