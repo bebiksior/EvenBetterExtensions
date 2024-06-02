@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    {
+      "manifestURL": "https://raw.githubusercontent.com/bebiksior/EvenBetter/main/manifest.json",
+      "downloadURL": "https://raw.githubusercontent.com/bebiksior/EvenBetter/main/dist-zip/plugin.zip"
+    }
+  ]
+}
