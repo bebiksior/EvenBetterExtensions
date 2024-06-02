@@ -1,0 +1,8 @@
+.c-content[data-page="#/plugins/settings"] {
+    background-color: var(--c-bg-subtle);
+}
+
+.eb-plugins-settings__content,
+.eb-plugins-settings {
+    width: 100%;
+}

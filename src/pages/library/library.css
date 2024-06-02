@@ -1,0 +1,55 @@
+.c-content[data-page="#/plugins/library"] {
+    background-color: var(--c-bg-subtle);
+}
+
+.c-content[data-page="#/plugins/library"] .p-column-header {
+    border-top-width: var(--c-border-width-3);
+}
+
+/* fix classes that reqire [data-v-*] */
+.c-content[data-page="#/plugins/library"] .c-table-expansion {
+    padding: 0 var(--c-space-4) var(--c-space-4) var(--c-space-4);
+}
+
+.c-content[data-page="#/plugins/library"] .c-table-expansion__meta a {
+    color: var(--c-fg-info);
+}
+
+.c-content[data-page="#/plugins/library"] .c-table-expansion__plugins {
+    display: flex;
+    flex-direction: column;
+    gap: var(--c-space-1);
+}
+
+.c-content[data-page="#/plugins/library"] .c-well {
+    --well-separator-color: rgba(0, 0, 0, .4);
+    --well-border-color: rgba(0, 0, 0, .24);
+    background-color: var(--c-bg-default);
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    border: .075em solid var(--well-border-color);
+    border-radius: .25em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: max-content 1fr max-content;
+    grid-template-areas:
+        "header"
+        "body"
+        "footer";
+}
+
+.c-content[data-page="#/plugins/library"] .c-well__body {
+    grid-area: body;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    overflow-y: auto;
+}
+
+.c-content[data-page="#/plugins/library"] .c-table-expansion__plugin-well {
+    display: flex;
+    gap: var(--c-space-4);
+    padding: var(--c-space-2) var(--c-space-4);
+}

@@ -1,158 +1,103 @@
-import { Caido } from "@caido/sdk-frontend";
-import { ExtensionsPage, ExtensionSubPage } from "./pages";
-import EvenBetterAPI from "@bebiks/evenbetter-api";
-import extensionsManager from "./extensions";
-import { OnExtensionLoad } from "./events/onExtensionLoad";
-import { escapeHTML } from "./utils/index";
+import type { Caido } from "@caido/sdk-frontend";
+import { EvenBetterAPI } from "@bebiks/evenbetter-api";
+import { getEvenBetterAPI, setEvenBetterAPI } from "./utils/evenbetterapi";
+import { getCaidoAPI, setCaidoAPI } from "./utils/caidoapi";
+import { customPluginsPage } from "./pages";
+import { logger } from "./utils/logger";
+import { PluginsManager } from "./plugins";
+import { LibraryPage } from "./pages/library/library";
+import { SettingsPage } from "./pages/settings/settings";
 import { PageOpenEvent } from "@bebiks/evenbetter-api/src/events/onPageOpen";
-import styles from "./style.css";
-import loadCSS from "@bebiks/evenbetter-api/src/css";
-import { CURRENT_VERSION, VERSION_CHECK_URL } from "./constants";
+import { getSetting } from "@bebiks/evenbetter-api/src/storage";
 
-function setDefaultValues() {
-  if (!localStorage.getItem("eb-show-notifications")) {
-    localStorage.setItem("eb-show-notifications", "true");
-  }
+const CURRENT_VERSION = "2.0.0";
+export const init = (caido: Caido) => {
+  setCaidoAPI(caido);
 
-  if (!localStorage.getItem("eb-show-update-notification")) {
-    localStorage.setItem("eb-show-update-notification", "true");
-  }
-}
+  const evenBetterAPI = new EvenBetterAPI(caido, {
+    manifestID: "evenbetter-extensions",
+    name: "EvenBetter: Extensions",
+  });
 
-function setupEventListeners() {
-  EvenBetterAPI.eventManager.on("onSettingsTabOpen", (data) => {
-    switch (data) {
-      case "developer":
-        const jsSaveButton = document.querySelector(".c-custom-js__footer");
-        jsSaveButton.removeEventListener("click", reloadPage);
-        jsSaveButton.addEventListener("click", reloadPage);
+  setEvenBetterAPI(evenBetterAPI);
+
+  evenBetterAPI.eventManager.on("onPageOpen", (data: PageOpenEvent) => {
+    if (data.oldUrl !== "") {
+      localStorage.setItem("ebe:previousPath", data.newUrl);
     }
   });
 
-  EvenBetterAPI.eventManager.on("onPageOpen", (data: PageOpenEvent) => {
-    const extensionsSidebarItems = Array.from(
-      document.querySelectorAll(".c-sidebar-item")
-    ).filter((item) => item.textContent == "Extensions");
-    if (extensionsSidebarItems.length == 0) return;
-
-    const extensionsSidebarItem = extensionsSidebarItems[0] as HTMLElement;
-    extensionsSidebarItem.setAttribute(
-      "data-is-active",
-      data.newUrl.startsWith("#/extensions/") ? "true" : "false"
-    );
+  evenBetterAPI.eventManager.on("onCaidoLoad", () => {
+    const previousPath = localStorage.getItem("ebe:previousPath");
+    if (previousPath) {
+      caido.navigation.goTo(previousPath.slice(1));
+      localStorage.removeItem("ebe:previousPath");
+    }
   });
-}
 
-function registerExtensionsPages() {
-  Caido.navigation.addPage("/extensions/all", {
-    body: ExtensionsPage(ExtensionSubPage.ALL),
-  });
-  Caido.navigation.addPage("/extensions/installed", {
-    body: ExtensionsPage(ExtensionSubPage.INSTALLED),
-  });
-  Caido.navigation.addPage("/extensions/custom", {
-    body: ExtensionsPage(ExtensionSubPage.CUSTOM),
-  });
-  Caido.navigation.addPage("/extensions/settings", {
-    body: ExtensionsPage(ExtensionSubPage.SETTINGS),
-  });
-}
+  const pluginsManager = new PluginsManager();
 
-function registerSidebarItem() {
-  Caido.sidebar.registerItem("Extensions", "/extensions/all", {
-    icon: "fas fa-puzzle-piece",
-    group: "EvenBetter",
-  });
-}
+  customPluginsPage();
 
-function registerCommands() {
-  Caido.commands.register("eb:openExtensionsPage", {
-    name: "Go to Extensions",
-    group: "EvenBetter: Navigation",
-    run: () => {
-      Caido.navigation.goTo("/extensions/all");
-    },
-  });
-  Caido.commandPalette.register("eb:openExtensionsPage");
-}
+  const libraryPage = new LibraryPage(pluginsManager);
+  libraryPage.init();
 
-async function onCaidoLoad() {
-  loadCSS({
-    id: "eb-extensions",
-    cssText: styles.toString(),
-  });
-  setDefaultValues();
+  const settingsPage = new SettingsPage(pluginsManager);
+  settingsPage.init();
 
-  const onExtensionLoad = new OnExtensionLoad();
-  EvenBetterAPI.eventManager.registerEvent("onExtensionLoad", onExtensionLoad);
+  pluginsManager.fetchPlugins();
 
-  registerExtensionsPages();
-  registerCommands();
-  registerSidebarItem();
-  setupEventListeners();
+  if (localStorage.getItem("ebe:migrateAttempt")) {
+    localStorage.removeItem("ebe:migrateAttempt");
 
-  if (localStorage.getItem("eb-message-onload")) {
-    EvenBetterAPI.modal.openModal({
-      title: "EvenBetter Extensions",
-      content: escapeHTML(localStorage.getItem("eb-message-onload")),
+    evenBetterAPI.toast.showToast({
+      message:
+        "Successfully migrated EvenBetter: Extensions to the new Caido plugin system!",
+      duration: 5000,
     });
-    localStorage.removeItem("eb-message-onload");
   }
 
-  if (location.hash == "#/settings/developer") {
-    const jsSaveButton = document.querySelector(".c-custom-js__footer");
-    jsSaveButton.removeEventListener("click", reloadPage);
-    jsSaveButton.addEventListener("click", reloadPage);
-  }
+  checkUpdates();
 
-  const extensions = await extensionsManager.initExtensions();
-  extensions.forEach((extension) => {
-    const installedExtension = extensionsManager.getInstalledExtension(
-      extension.id
-    );
-    if (!installedExtension) return;
-    if (installedExtension.installedVersion != extension.latestVersion) {
-      console.log(
-        `New version available for extension ${extension.id}: ${extension.latestVersion}`
-      );
-      if (localStorage.getItem("eb-auto-update") === "true") {
-        localStorage.setItem(
-          `eb-message-onload`,
-          `Auto-updated extension ${extension.name} to version ${extension.latestVersion}. If you want to disable auto-updates, go to Extensions -> Settings.`
-        );
-        extensionsManager.updateExtension(installedExtension.extensionID);
-      }
-      if (localStorage.getItem("eb-show-notifications") === "true") {
-        EvenBetterAPI.modal.openModal({
-          title: "New extension version available",
-          content: `New version available for extension <b style='color:var(--c-fg-default);'>${extension.name}</b> (<span style='color:var(--c-bg-danger);'>${installedExtension.installedVersion}</span> -> <span style='color:var(--c-bg-success);'>${extension.latestVersion}</span>).`,
-        });
-      }
-    }
-  });
-  EvenBetterAPI.eventManager.triggerEvent("onExtensionLoad");
-
-  if (localStorage.getItem("previousPage")) {
-    const previousPage = localStorage.getItem("previousPage").split("#")[1];
-
-    console.log("Restoring previous path: " + previousPage);
-    Caido.navigation.goTo(previousPage);
-    localStorage.removeItem("previousPage");
-  }
-}
-
-const reloadPage = () => {
-  setTimeout(() => {
-    location.reload();
-  }, 250);
+  logger.info("EvenBetterExtensions initialized");
 };
 
-extensionsManager.loadInstalledExtensions();
-extensionsManager.getInstalledExtensions().forEach((installedExtension) => {
-  console.log("Running extension: " + installedExtension.extensionID);
-  extensionsManager.runExtension(installedExtension.extensionID);
-});
 
-EvenBetterAPI.eventManager.on("onCaidoLoad", () => {
-  onCaidoLoad();
-});
+const MANIFEST_URL = "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/manifest.json"
+const checkUpdates = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  if(!getSetting("show-update-notifications")) return;
+
+  const response = await fetch(MANIFEST_URL);
+  const manifest = await response.json();
+  
+  if (manifest.version !== CURRENT_VERSION) {
+    const modalBody = document.createElement("div");
+    modalBody.innerHTML = `A new version of EvenBetter: Extensions is available!`;
+    modalBody.innerHTML += `<br>Current version: ${CURRENT_VERSION}`;
+    modalBody.innerHTML += `<br>New version: ${manifest.version}`;
+    modalBody.innerHTML += `<br><br>To update, download the latest plugin.zip file from the Releases page, in your Caido go to the Plugins page, uninstall the current version and install the new one.`;
+
+    const goToReleasesButton = getCaidoAPI().ui.button({
+      label: "Go to Releases",
+      variant: "primary",
+      size: "small",
+    })
+    
+    goToReleasesButton.addEventListener("click", () => {
+      getEvenBetterAPI().helpers.openInBrowser("https://github.com/bebiksior/EvenBetterExtensions/releases")
+    })
+
+    modalBody.style.display = "flex"
+    modalBody.style.flexDirection = "column"
+    modalBody.style.gap = "10px"
+    modalBody.style.fontSize = "15px"
+
+    modalBody.appendChild(goToReleasesButton)
+    
+    getEvenBetterAPI().modal.openModal({
+      title: "New version available!",
+      content: modalBody
+    })
+  }
+}
