@@ -1,6 +1,6 @@
 // Migration script from the old plugin system to the new one
 const NEW_PLUGIN_URL =
-  "https://github.com/bebiksior/EvenBetterExtensions/main/dist-zip/plugin.zip";
+  "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/dist-zip/plugin.zip";
 
 const getNewPluginFile = async (url) => {
   const response = await fetch(url);
