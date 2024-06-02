@@ -1,0 +1,20 @@
+{
+  "id": "evenbetter-extensions",
+  "name": "EvenBetter: Extensions",
+  "version": "2.0.0",
+  "description": "Adds a extensions library tab to your Caido :D",
+  "author": {
+    "name": "bebiks",
+    "email": "bebiks@cvssadvisor.com",
+    "url": "https://github.com/bebiksior/EvenBetterExtensions"
+  },
+  "plugins": [
+    {
+      "kind": "frontend",
+      "id": "evenbetter-extensions",
+      "name": "EvenBetter: Extensions",
+      "entrypoint": "frontend/script.js",
+      "style": "frontend/style.css"
+    }
+  ]
+}
