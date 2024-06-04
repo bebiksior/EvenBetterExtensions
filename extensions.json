@@ -5,10 +5,6 @@
       "downloadURL": "https://raw.githubusercontent.com/bebiksior/EvenBetter/main/dist-zip/plugin.zip"
     },
     {
-      "manifestURL": "https://raw.githubusercontent.com/Riddle1001/caido-ai-rename-replay/master/manifest.json",
-      "downloadURL": "https://raw.githubusercontent.com/Riddle1001/caido-ai-rename-replay/master/dist-zip/plugin.zip"
-    },
-    {
       "manifestURL":"https://raw.githubusercontent.com/bebiksior/starterkit-plugin/main/manifest.json",
       "downloadURL":"https://raw.githubusercontent.com/bebiksior/starterkit-plugin/main/dist-zip/plugin.zip"
     }
