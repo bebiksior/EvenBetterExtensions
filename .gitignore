@@ -4,3 +4,4 @@ test
 .vscode
 dist
 dist-zip
+pnpm-lock.yaml

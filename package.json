@@ -1,6 +1,6 @@
 {
   "name": "evenbetter-extensions",
-  "version": "1.1.0",
+  "version": "2.1.0",
   "description": "Quicky install and keep updated Caido extensions",
   "author": "bebiks <bebiks@cvssadvisor.com>",
   "license": "CC0-1.0",
@@ -10,9 +10,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@bebiks/evenbetter-api": "2.0.0",
-    "@caido/sdk-frontend": "0.37.0",
-    "typescript": "^5.4.5"
+    "@bebiks/evenbetter-api": "^2.2.0",
+    "@caido/sdk-frontend": "^0.39.0",
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
     "path": "^0.12.7",

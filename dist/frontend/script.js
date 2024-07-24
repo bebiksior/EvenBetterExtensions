@@ -1,6 +1,6 @@
-var F = Object.defineProperty;
-var V = (r, e, t) => e in r ? F(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
-var E = (r, e, t) => (V(r, typeof e != "symbol" ? e + "" : e, t), t);
+var V = Object.defineProperty;
+var F = (r, e, t) => e in r ? V(r, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : r[e] = t;
+var C = (r, e, t) => (F(r, typeof e != "symbol" ? e + "" : e, t), t);
 let z = class {
   log(e, t) {
   }
@@ -36,7 +36,7 @@ class W {
       this.events[e].init();
   }
 }
-class G {
+class j {
   constructor() {
     this.handlers = [];
   }
@@ -45,14 +45,14 @@ class G {
   }
   init() {
     const e = setInterval(() => {
-      j() && (clearInterval(e), this.trigger());
+      G() && (clearInterval(e), this.trigger());
     }, 25);
   }
   trigger() {
     this.handlers.forEach((e) => e());
   }
 }
-const j = () => document.querySelector(".c-content") !== null;
+const G = () => document.querySelector(".c-content") !== null;
 class X {
   constructor() {
     this.handlers = [];
@@ -117,20 +117,20 @@ class Z {
 let x = null;
 const J = (r) => {
   x = r;
-}, L = () => {
+}, y = () => {
   if (!x)
     throw new Error("PluginData is not set yet!");
   return x;
 }, B = async (r, e) => {
-  const t = L();
+  const t = y();
   localStorage.setItem(`ebapi:settings:${t.manifestID}:${r}`, e);
-}, w = (r) => {
-  const e = L();
+}, v = (r) => {
+  const e = y();
   return localStorage.getItem(`ebapi:settings:${e.manifestID}:${r}`);
-}, Q = () => localStorage.getItem(`ebapi:${L().manifestID}:welcomeToast`), N = () => {
-  localStorage.removeItem(`ebapi:${L().manifestID}:welcomeToast`);
+}, Q = () => localStorage.getItem(`ebapi:${y().manifestID}:welcomeToast`), N = () => {
+  localStorage.removeItem(`ebapi:${y().manifestID}:welcomeToast`);
 }, Y = async (r) => {
-  localStorage.setItem(`ebapi:${L().manifestID}:welcomeToast`, JSON.stringify(r));
+  localStorage.setItem(`ebapi:${y().manifestID}:welcomeToast`, JSON.stringify(r));
 }, ee = `
 .v-toast--fade-in {
     animation: fadeIn 0.15s ease-in-out forwards;
@@ -348,8 +348,8 @@ function pe(r, e) {
   e.items.forEach((c) => {
     const u = document.createElement("li");
     u.classList.add("p-menuitem"), u.setAttribute("role", "menuitem"), u.style.margin = "0";
-    const v = document.createElement("div");
-    v.classList.add("p-menuitem-content"), v.setAttribute("data-pc-section", "content");
+    const w = document.createElement("div");
+    w.classList.add("p-menuitem-content"), w.setAttribute("data-pc-section", "content");
     const g = document.createElement("div");
     g.classList.add("c-settings__item"), g.setAttribute("data-is-active", "true"), g.addEventListener("click", () => {
       n.classList.remove("p-menubar-mobile-active");
@@ -357,9 +357,9 @@ function pe(r, e) {
     const p = document.createElement("a");
     p.setAttribute("href", c.url), p.setAttribute("draggable", "false"), p.draggable = !1, p.classList.add("p-menuitem-link"), c.url === location.hash && (p.style.backgroundColor = "rgba(255,255,255,.04)", p.style.borderRadius = "var(--c-border-radius-2)");
     let b = null;
-    if (r.eventManager.on("onPageOpen", (C) => {
+    if (r.eventManager.on("onPageOpen", (E) => {
       if (c.sidebarItemName)
-        if (o.includes(C.newUrl)) {
+        if (o.includes(E.newUrl)) {
           const M = document.querySelectorAll(".c-sidebar-item");
           if (M) {
             const T = Array.from(M).filter(
@@ -369,13 +369,13 @@ function pe(r, e) {
           }
         } else
           b && (b.removeAttribute("data-is-selected"), b.removeAttribute("data-is-active"), b = null);
-      C.newUrl === c.url ? (c.onOpen && c.onOpen(), p.style.backgroundColor = "rgba(255,255,255,.04)", p.style.borderRadius = "var(--c-border-radius-2)") : (p.style.backgroundColor = "", p.style.borderRadius = "");
+      E.newUrl === c.url ? (c.onOpen && c.onOpen(), p.style.backgroundColor = "rgba(255,255,255,.04)", p.style.borderRadius = "var(--c-border-radius-2)") : (p.style.backgroundColor = "", p.style.borderRadius = "");
     }), c.icon) {
-      const C = document.createElement("i");
-      C.classList.add("c-icon", "fas", c.icon), C.style.marginRight = "var(--c-space-2)", p.appendChild(C);
+      const E = document.createElement("i");
+      E.classList.add("c-icon", "fas", c.icon), E.style.marginRight = "var(--c-space-2)", p.appendChild(E);
     }
     const S = document.createElement("span");
-    S.textContent = c.title, p.appendChild(S), g.appendChild(p), v.appendChild(g), u.appendChild(v), i.appendChild(u);
+    S.textContent = c.title, p.appendChild(S), g.appendChild(p), w.appendChild(g), u.appendChild(w), i.appendChild(u);
   });
   const l = document.createElement("a");
   l.setAttribute("role", "button"), l.setAttribute("tabindex", "0"), l.classList.add("p-menubar-button"), l.setAttribute("aria-haspopup", "true"), l.setAttribute("aria-expanded", "false"), l.setAttribute("aria-label", "Navigation"), l.setAttribute("data-pc-section", "button"), l.setAttribute("aria-controls", "pv_id_3"), l.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p-icon" aria-hidden="true" data-pc-section="menubuttonicon"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.3226 3.6129H0.677419C0.497757 3.6129 0.325452 3.54152 0.198411 3.41448C0.0713707 3.28744 0 3.11514 0 2.93548C0 2.75581 0.0713707 2.58351 0.198411 2.45647C0.325452 2.32943 0.497757 2.25806 0.677419 2.25806H13.3226C13.5022 2.25806 13.6745 2.32943 13.8016 2.45647C13.9286 2.58351 14 2.75581 14 2.93548C14 3.11514 13.9286 3.28744 13.8016 3.41448C13.6745 3.54152 13.5022 3.6129 13.3226 3.6129ZM13.3226 7.67741H0.677419C0.497757 7.67741 0.325452 7.60604 0.198411 7.479C0.0713707 7.35196 0 7.17965 0 6.99999C0 6.82033 0.0713707 6.64802 0.198411 6.52098C0.325452 6.39394 0.497757 6.32257 0.677419 6.32257H13.3226C13.5022 6.32257 13.6745 6.39394 13.8016 6.52098C13.9286 6.64802 14 6.82033 14 6.99999C14 7.17965 13.9286 7.35196 13.8016 7.479C13.6745 7.60604 13.5022 7.67741 13.3226 7.67741ZM0.677419 11.7419H13.3226C13.5022 11.7419 13.6745 11.6706 13.8016 11.5435C13.9286 11.4165 14 11.2442 14 11.0645C14 10.8848 13.9286 10.7125 13.8016 10.5855C13.6745 10.4585 13.5022 10.3871 13.3226 10.3871H0.677419C0.497757 10.3871 0.325452 10.4585 0.198411 10.5855C0.0713707 10.7125 0 10.8848 0 11.0645C0 11.2442 0.0713707 11.4165 0.198411 11.5435C0.325452 11.6706 0.497757 11.7419 0.677419 11.7419Z" fill="currentColor"></path></svg>', l.addEventListener("click", () => {
@@ -545,14 +545,14 @@ const we = (r, e) => {
   }), o.appendChild(d), document.body.appendChild(t), (c = l.querySelector("input")) == null || c.focus(), l.addEventListener("keydown", (u) => {
     u.key === "Enter" && d.click(), u.key === "Escape" && t.remove();
   });
-}, Ee = (r, e, t, n) => {
+}, Ce = (r, e, t, n) => {
   H.push({
     commandName: e,
     promptPlaceholder: t,
     onPrompt: n
   });
 };
-class Ce {
+class Ee {
   constructor(e) {
     this.apiInstance = e, this.apiInstance.eventManager.on("onCommandRun", (t) => {
       const n = H.find(
@@ -562,7 +562,7 @@ class Ce {
     });
   }
   createPromptCommand(e, t, n) {
-    Ee(this.apiInstance, e, t, n);
+    Ce(this.apiInstance, e, t, n);
   }
 }
 const ye = `
@@ -676,7 +676,7 @@ class Pe {
   }
 }
 const R = () => typeof __TAURI_INVOKE__ < "u", D = async (r, e) => await __TAURI_INVOKE__(r, e), U = /* @__PURE__ */ new Set();
-class Ie {
+class Ae {
   constructor() {
     this.downloadFile = async (e, t) => {
       if (R())
@@ -696,14 +696,14 @@ class Ie {
   }
 }
 var f = /* @__PURE__ */ ((r) => (r.TEXT = "text", r.NUMBER = "number", r.CHECKBOX = "checkbox", r.SELECT = "select", r))(f || {});
-let Ae = class {
+let Ie = class {
   constructor(e, t) {
     this.evenBetterAPI = e, this.title = t.title, this.description = t.description, this.inputGroups = t.inputGroups, this.initDefaults();
   }
   async initDefaults() {
     for (const [e, t] of this.inputGroups.entries())
       for (const [n, a] of t.inputs.entries())
-        a.defaultValue && !w(a.id) && await B(a.id, a.defaultValue);
+        a.defaultValue && !v(a.id) && await B(a.id, a.defaultValue);
   }
   className(e) {
     return `eb-settings-page__${e}`;
@@ -728,13 +728,13 @@ let Ae = class {
       const c = document.createElement("p");
       c.textContent = i.groupDescription, c.classList.add(this.className("group-description")), l.appendChild(d), l.appendChild(c), o.appendChild(l);
       const u = document.createElement("div");
-      u.classList.add(this.className("group-inputs")), i.inputs.forEach((v) => {
+      u.classList.add(this.className("group-inputs")), i.inputs.forEach((w) => {
         if (i.separateWithLine) {
           const p = document.createElement("hr");
           p.classList.add(this.className("line")), u.appendChild(p);
         }
-        const g = this.createInputElement(v, (p) => {
-          B(v.id, p);
+        const g = this.createInputElement(w, (p) => {
+          B(w.id, p);
         });
         u.appendChild(g);
       }), o.appendChild(u), s.appendChild(o);
@@ -754,7 +754,7 @@ let Ae = class {
         );
         const i = s.querySelector(
           "input"
-        ), o = w(e.id);
+        ), o = v(e.id);
         o ? i.value = o : i.value = e.defaultValue, t && i.addEventListener("input", (b) => {
           t(i.value);
         });
@@ -766,7 +766,7 @@ let Ae = class {
         ), s.querySelector("input").type = "number";
         const l = s.querySelector(
           "input"
-        ), d = w(e.id);
+        ), d = v(e.id);
         d ? l.value = d : l.value = e.defaultValue, t && l.addEventListener("input", (b) => {
           t(l.value);
         });
@@ -775,15 +775,15 @@ let Ae = class {
         s = this.evenBetterAPI.components.createCheckbox();
         const c = s.querySelector(
           "input"
-        ), u = w(e.id);
+        ), u = v(e.id);
         u ? c.checked = u == "true" : c.checked = e.defaultValue == "true", t && c.addEventListener("change", (b) => {
           t(c.checked.toString());
         });
         break;
       case f.SELECT:
-        const v = e.options;
-        s = this.evenBetterAPI.components.createSelectInput(v);
-        const g = s, p = w(e.id);
+        const w = e.options;
+        s = this.evenBetterAPI.components.createSelectInput(w);
+        const g = s, p = v(e.id);
         p ? g.value = p : g.value = e.defaultValue, t && g.addEventListener("change", (b) => {
           t(g.value);
         });
@@ -799,56 +799,80 @@ class ke {
     this.apiInstance = e;
   }
   createSettingsPage(e) {
-    return new Ae(this.apiInstance, e);
+    return new Ie(this.apiInstance, e);
   }
 }
 class _e {
+  constructor() {
+    this.handlers = [];
+  }
+  addHandler(e) {
+    this.handlers.push(e);
+  }
+  init() {
+    const e = document.querySelector(".c-current-project");
+    if (e) {
+      const t = (s, i) => {
+        for (const o of s)
+          if (o.type === "attributes" && o.attributeName === "data-project-id") {
+            const l = e.getAttribute("data-project-id");
+            l && this.trigger(l);
+          }
+      }, n = new MutationObserver(t), a = { attributes: !0, attributeFilter: ["data-project-id"] };
+      n.observe(e, a);
+    }
+  }
+  trigger(e) {
+    this.handlers.forEach((t) => t(e));
+  }
+}
+class Se {
   constructor(e, t) {
     re(e), J(t), this.eventManager = new W();
-    const n = new G(), a = new Z(), s = new K(this.eventManager), i = new X(), o = new se();
-    this.eventManager.registerEvent("onCaidoLoad", n), this.eventManager.registerEvent("onSettingsTabOpen", a), this.eventManager.registerEvent("onPageOpen", s), this.eventManager.registerEvent("onContextMenuOpen", i), this.eventManager.registerEvent("onCommandRun", o), this.eventManager.on("onCaidoLoad", () => {
+    const n = new j(), a = new Z(), s = new K(this.eventManager), i = new X(), o = new se(), l = new _e();
+    this.eventManager.registerEvent("onCaidoLoad", n), this.eventManager.registerEvent("onSettingsTabOpen", a), this.eventManager.registerEvent("onPageOpen", s), this.eventManager.registerEvent("onContextMenuOpen", i), this.eventManager.registerEvent("onCommandRun", o), this.eventManager.registerEvent("onProjectChange", l), this.eventManager.on("onCaidoLoad", () => {
       this.eventManager.triggerEvent("onPageOpen", {
         newUrl: location.hash,
         oldUrl: ""
       });
-      const l = Q();
-      if (l) {
+      const d = Q();
+      if (d) {
         try {
-          this.toast.showToast(JSON.parse(l));
-        } catch (d) {
-          console.error(d), N();
+          this.toast.showToast(JSON.parse(d));
+        } catch (c) {
+          console.error(c), N();
         }
         N();
       }
-    }), this.eventManager.initEvents(), this.helpers = new Ie(), this.promptCommands = new Ce(this), this.modal = new Pe(this), this.toast = new ae(this), this.components = new ve(this), this.templates = new ke(this), this.version = ie;
+    }), this.eventManager.initEvents(), this.helpers = new Ae(), this.promptCommands = new Ee(this), this.modal = new Pe(this), this.toast = new ae(this), this.components = new ve(this), this.templates = new ke(this), this.version = ie;
   }
 }
-let I = null;
-const Se = (r) => {
-  I = r;
-}, h = () => {
-  if (!I)
-    throw new Error("EvenBetterAPI is not set yet!");
-  return I;
-};
 let A = null;
 const Me = (r) => {
   A = r;
-}, m = () => {
+}, h = () => {
   if (!A)
-    throw new Error("CaidoAPI is not set yet!");
+    throw new Error("EvenBetterAPI is not set yet!");
   return A;
-}, Te = async (r) => m().graphql.installPluginPackage({
+};
+let I = null;
+const Te = (r) => {
+  I = r;
+}, m = () => {
+  if (!I)
+    throw new Error("CaidoAPI is not set yet!");
+  return I;
+}, Be = async (r) => m().graphql.installPluginPackage({
   input: {
     source: {
       file: r
     }
   }
-}), Be = () => {
+}), Ne = () => {
   h().eventManager.on("onPageOpen", (r) => {
-    r.newUrl === "#/plugins" && Ne();
+    r.newUrl === "#/plugins" && Re();
   });
-}, Ne = () => {
+}, Re = () => {
   const r = document.querySelector(
     ".c-table-header__title"
   );
@@ -888,9 +912,9 @@ const Me = (r) => {
   });
   n.id = "plugins-navigation-bar", r.textContent = "", r.appendChild(n);
 };
-class Re {
+class De {
   constructor(e) {
-    E(this, "serviceName");
+    C(this, "serviceName");
     this.serviceName = e;
   }
   formatMessage(e, t) {
@@ -906,18 +930,22 @@ class Re {
     console.error(this.formatMessage("ERROR", e));
   }
 }
-const y = new Re("EvenBetterExtensions");
-let De = "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/extensions.json";
-class Ue {
+const L = new De("EvenBetterExtensions");
+let Ue = "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/extensions.json";
+class Oe {
   constructor() {
-    E(this, "plugins", []);
-    E(this, "callbacks", []);
+    C(this, "plugins", []);
+    C(this, "callbacks", []);
   }
   register(e) {
     this.plugins.push(e), this.callbacks && this.callbacks.forEach((t) => t(e));
   }
-  getPluginsURL() {
-    return w("extensions-url") || De;
+  getMainPluginsURL() {
+    return v("extensions-url") || Ue;
+  }
+  getAdditionalPluginsURLs() {
+    var e;
+    return ((e = v("additional-extensions-urls")) == null ? void 0 : e.split(",")) || [];
   }
   getPlugins() {
     return this.plugins;
@@ -953,7 +981,7 @@ class Ue {
     ), a = new File([n], `${e.manifestPackageID}.zip`, {
       type: "application/zip"
     }), { showToast: s, setWelcomeMessage: i } = h().toast;
-    Te(a).then((o) => {
+    Be(a).then((o) => {
       const l = o.installPluginPackage.error;
       if (l)
         throw l.__typename == "PluginUserError" ? new Error(l.reason) : new Error(l.code);
@@ -1005,8 +1033,6 @@ class Ue {
       return new Error("downloadUrl is required");
     if (!e.author.name)
       return new Error("author.name is required");
-    if (!e.author.email)
-      return new Error("author.email is required");
     if (!e.author.url)
       return new Error("author.url is required");
     if (!Array.isArray(e.pluginsIDs))
@@ -1029,17 +1055,15 @@ class Ue {
   async checkForUpdates() {
     this.plugins.forEach(async (e) => {
       const t = await this.getInstalledPlugin(e);
-      t && e.version !== t.installedVersion && (w("notifications") === "true" && h().toast.showToast({
+      t && e.version !== t.installedVersion && (v("notifications") === "true" && h().toast.showToast({
         message: `New version of ${e.name} is available!`,
         type: "info"
-      }), w("auto-update") === "true" && this.updatePlugin(e));
+      }), v("auto-update") === "true" && this.updatePlugin(e));
     });
   }
   async fetchPlugins() {
     this.plugins = [];
-    try {
-      const t = await (await fetch(this.getPluginsURL())).json();
-      y.info(`Fetched ${t.plugins.length} plugins`);
+    const e = async (t) => {
       for (const n of t.plugins) {
         const s = await (await fetch(n.manifestURL)).json(), i = {
           manifestPackageID: s.id,
@@ -1051,20 +1075,37 @@ class Ue {
           downloadUrl: n.downloadURL
         }, o = this.validatePlugin(i);
         if (o) {
-          y.error(`Error validating plugin: ${o.message}`), h().toast.showToast({
+          L.error(`Error validating plugin: ${o.message}`), h().toast.showToast({
             message: `Error validating plugin: ${o.message}`,
             type: "error"
           });
           continue;
         }
-        y.info(`Registering plugin: ${i.name}`), this.register(i);
+        L.info(`Registering plugin: ${i.name}`), this.register(i);
       }
+    };
+    try {
+      const n = await (await fetch(this.getMainPluginsURL())).json();
+      if (await e(n), this.getAdditionalPluginsURLs().length > 0)
+        for (const a of this.getAdditionalPluginsURLs()) {
+          if (!a || !this.validateURL(a))
+            continue;
+          const i = await (await fetch(a)).json();
+          await e(i);
+        }
       await this.checkForUpdates();
-    } catch (e) {
-      y.error(`Error fetching plugins: ${e.message}`), h().toast.showToast({
-        message: `Error fetching plugins: ${e.message}`,
+    } catch (t) {
+      L.error(`Error fetching plugins: ${t.message}`), h().toast.showToast({
+        message: `Error fetching plugins: ${t.message}`,
         type: "error"
       });
+    }
+  }
+  validateURL(e) {
+    try {
+      return new URL(e), !0;
+    } catch {
+      return !1;
     }
   }
   // TODO: i probably should do some caching here, this function is called a lot
@@ -1085,12 +1126,12 @@ class Ue {
     this.callbacks.push(e);
   }
 }
-const $e = '<button class="p-row-toggler p-link" type="button" aria-expanded="true" aria-controls="pv_id_10_0_expansion" aria-label="Row Expanded" data-pc-section="rowtoggler" data-pc-group-section="rowactionbutton"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p-icon p-row-toggler-icon" aria-hidden="true" data-pc-section="rowtogglericon"><path d="M7.01744 10.398C6.91269 10.3985 6.8089 10.378 6.71215 10.3379C6.61541 10.2977 6.52766 10.2386 6.45405 10.1641L1.13907 4.84913C1.03306 4.69404 0.985221 4.5065 1.00399 4.31958C1.02276 4.13266 1.10693 3.95838 1.24166 3.82747C1.37639 3.69655 1.55301 3.61742 1.74039 3.60402C1.92777 3.59062 2.11386 3.64382 2.26584 3.75424L7.01744 8.47394L11.769 3.75424C11.9189 3.65709 12.097 3.61306 12.2748 3.62921C12.4527 3.64535 12.6199 3.72073 12.7498 3.84328C12.8797 3.96582 12.9647 4.12842 12.9912 4.30502C13.0177 4.48162 12.9841 4.662 12.8958 4.81724L7.58083 10.1322C7.50996 10.2125 7.42344 10.2775 7.32656 10.3232C7.22968 10.3689 7.12449 10.3944 7.01744 10.398Z" fill="currentColor"></path></svg></button>', $ = '<svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p-icon p-row-toggler-icon" aria-hidden="true" data-pc-section="rowtogglericon" viewbox="0 0 14 14"><path d="M4.38708 13C4.28408 13.0005 4.18203 12.9804 4.08691 12.9409C3.99178 12.9014 3.9055 12.8433 3.83313 12.7701C3.68634 12.6231 3.60388 12.4238 3.60388 12.2161C3.60388 12.0084 3.68634 11.8091 3.83313 11.6622L8.50507 6.99022L3.83313 2.31827C3.69467 2.16968 3.61928 1.97313 3.62287 1.77005C3.62645 1.56698 3.70872 1.37322 3.85234 1.22959C3.99596 1.08597 4.18972 1.00371 4.3928 1.00012C4.59588 0.996539 4.79242 1.07192 4.94102 1.21039L10.1669 6.43628C10.3137 6.58325 10.3962 6.78249 10.3962 6.99022C10.3962 7.19795 10.3137 7.39718 10.1669 7.54416L4.94102 12.7701C4.86865 12.8433 4.78237 12.9014 4.68724 12.9409C4.59212 12.9804 4.49007 13.0005 4.38708 13Z" fill="currentColor"></path></svg>', Oe = (r) => {
+const $e = '<button class="p-row-toggler p-link" type="button" aria-expanded="true" aria-controls="pv_id_10_0_expansion" aria-label="Row Expanded" data-pc-section="rowtoggler" data-pc-group-section="rowactionbutton"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p-icon p-row-toggler-icon" aria-hidden="true" data-pc-section="rowtogglericon"><path d="M7.01744 10.398C6.91269 10.3985 6.8089 10.378 6.71215 10.3379C6.61541 10.2977 6.52766 10.2386 6.45405 10.1641L1.13907 4.84913C1.03306 4.69404 0.985221 4.5065 1.00399 4.31958C1.02276 4.13266 1.10693 3.95838 1.24166 3.82747C1.37639 3.69655 1.55301 3.61742 1.74039 3.60402C1.92777 3.59062 2.11386 3.64382 2.26584 3.75424L7.01744 8.47394L11.769 3.75424C11.9189 3.65709 12.097 3.61306 12.2748 3.62921C12.4527 3.64535 12.6199 3.72073 12.7498 3.84328C12.8797 3.96582 12.9647 4.12842 12.9912 4.30502C13.0177 4.48162 12.9841 4.662 12.8958 4.81724L7.58083 10.1322C7.50996 10.2125 7.42344 10.2775 7.32656 10.3232C7.22968 10.3689 7.12449 10.3944 7.01744 10.398Z" fill="currentColor"></path></svg></button>', O = '<svg width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg" class="p-icon p-row-toggler-icon" aria-hidden="true" data-pc-section="rowtogglericon" viewbox="0 0 14 14"><path d="M4.38708 13C4.28408 13.0005 4.18203 12.9804 4.08691 12.9409C3.99178 12.9014 3.9055 12.8433 3.83313 12.7701C3.68634 12.6231 3.60388 12.4238 3.60388 12.2161C3.60388 12.0084 3.68634 11.8091 3.83313 11.6622L8.50507 6.99022L3.83313 2.31827C3.69467 2.16968 3.61928 1.97313 3.62287 1.77005C3.62645 1.56698 3.70872 1.37322 3.85234 1.22959C3.99596 1.08597 4.18972 1.00371 4.3928 1.00012C4.59588 0.996539 4.79242 1.07192 4.94102 1.21039L10.1669 6.43628C10.3137 6.58325 10.3962 6.78249 10.3962 6.99022C10.3962 7.19795 10.3137 7.39718 10.1669 7.54416L4.94102 12.7701C4.86865 12.8433 4.78237 12.9014 4.68724 12.9409C4.59212 12.9804 4.49007 13.0005 4.38708 13Z" fill="currentColor"></path></svg>', He = (r) => {
   const e = document.createElement("button");
-  e.classList.add("p-row-toggler", "p-link"), e.type = "button", e.setAttribute("aria-expanded", "false"), e.setAttribute("aria-controls", "pv_id_7_0_expansion"), e.setAttribute("aria-label", "Row Collapsed"), e.setAttribute("data-pc-section", "rowtoggler"), e.setAttribute("data-pc-group-section", "rowactionbutton"), e.innerHTML = $;
+  e.classList.add("p-row-toggler", "p-link"), e.type = "button", e.setAttribute("aria-expanded", "false"), e.setAttribute("aria-controls", "pv_id_7_0_expansion"), e.setAttribute("aria-label", "Row Collapsed"), e.setAttribute("data-pc-section", "rowtoggler"), e.setAttribute("data-pc-group-section", "rowactionbutton"), e.innerHTML = O;
   let t = !1;
   const n = () => {
-    t = !t, e.setAttribute("aria-expanded", t.toString()), e.innerHTML = t ? $e : $;
+    t = !t, e.setAttribute("aria-expanded", t.toString()), e.innerHTML = t ? $e : O;
   };
   return e.addEventListener("click", (a) => {
     var s;
@@ -1099,10 +1140,10 @@ const $e = '<button class="p-row-toggler p-link" type="button" aria-expanded="tr
       o && ((s = o.nextElementSibling) == null || s.remove(), n());
     } else {
       const o = a.target.closest("tr");
-      o && (o.after(He(r)), n());
+      o && (o.after(qe(r)), n());
     }
   }), e;
-}, He = (r) => {
+}, qe = (r) => {
   const e = document.createElement("tr");
   e.className = "p-datatable-row-expansion", e.setAttribute("role", "row"), e.setAttribute("data-pc-section", "rowexpansion");
   const t = document.createElement("td");
@@ -1114,16 +1155,20 @@ const $e = '<button class="p-row-toggler p-link" type="button" aria-expanded="tr
   const s = document.createElement("h3");
   s.textContent = "Website";
   const i = document.createElement("a");
-  i.href = r.author.url, i.textContent = r.author.url, i.addEventListener("click", (l) => {
-    l.preventDefault(), h().helpers.openInBrowser(r.author.url);
-  }), a.appendChild(s), a.appendChild(i);
-  const o = document.createElement("div");
-  return o.className = "c-table-expansion__plugins", n.appendChild(a), n.appendChild(o), t.appendChild(n), e.appendChild(t), e;
+  i.href = r.author.url, i.textContent = r.author.url;
+  const o = document.createElement("h3");
+  o.textContent = "Description";
+  const l = document.createElement("p");
+  l.textContent = r.description, i.addEventListener("click", (c) => {
+    c.preventDefault(), h().helpers.openInBrowser(r.author.url);
+  }), a.appendChild(s), a.appendChild(i), a.appendChild(o), a.appendChild(l);
+  const d = document.createElement("div");
+  return d.className = "c-table-expansion__plugins", n.appendChild(a), n.appendChild(d), t.appendChild(n), e.appendChild(t), e;
 };
-class qe {
+class Ve {
   constructor(e) {
-    E(this, "pluginsManager");
-    E(this, "table");
+    C(this, "pluginsManager");
+    C(this, "table");
     this.pluginsManager = e, this.table = h().components.createTable({
       columns: [
         { name: "", width: "3rem" },
@@ -1240,7 +1285,7 @@ class qe {
       n ? n.installedVersion !== t.version ? a = this.getUpdateElement(t) : a = this.getUninstallElement(t) : a = this.getInstallElement(t), this.table.addRow([
         {
           columnName: "",
-          value: Oe(t)
+          value: He(t)
         },
         {
           columnName: "Name",
@@ -1268,7 +1313,7 @@ class qe {
 }
 class Fe {
   constructor(e) {
-    E(this, "pluginsManager");
+    C(this, "pluginsManager");
     this.pluginsManager = e;
   }
   init() {
@@ -1348,7 +1393,8 @@ class Fe {
           separateWithLine: !0,
           inputs: [
             { type: f.CHECKBOX, labelAsHTML: !0, label: "<b>Show update notifications:</b> Get notified when new versions of EvenBetter: Extensions are available.", id: "show-update-notifications", defaultValue: "true" },
-            { type: f.TEXT, labelAsHTML: !0, label: "<b>URL to fetch extensions from:</b>", id: "extensions-url", defaultValue: this.pluginsManager.getPluginsURL() }
+            { type: f.TEXT, labelAsHTML: !0, label: "<b>URL to fetch extensions from:</b>", id: "extensions-url", defaultValue: this.pluginsManager.getMainPluginsURL() },
+            { type: f.TEXT, labelAsHTML: !0, label: "<b>Additional URLs (splitted by comma) to fetch extensions from:</b>", id: "additional-extensions-urls", defaultValue: "" }
           ]
         }
       ]
@@ -1356,30 +1402,30 @@ class Fe {
     return e.appendChild(n.render()), e;
   }
 }
-const O = "2.0.0", Xe = (r) => {
-  Me(r);
-  const e = new _e(r, {
+const $ = "2.0.0", Ke = (r) => {
+  Te(r);
+  const e = new Se(r, {
     manifestID: "evenbetter-extensions",
     name: "EvenBetter: Extensions"
   });
-  Se(e), e.eventManager.on("onPageOpen", (s) => {
+  Me(e), e.eventManager.on("onPageOpen", (s) => {
     s.oldUrl !== "" && localStorage.setItem("ebe:previousPath", s.newUrl);
   }), e.eventManager.on("onCaidoLoad", () => {
     const s = localStorage.getItem("ebe:previousPath");
     s && (r.navigation.goTo(s.slice(1)), localStorage.removeItem("ebe:previousPath"));
   });
-  const t = new Ue();
-  Be(), new qe(t).init(), new Fe(t).init(), t.fetchPlugins(), localStorage.getItem("ebe:migrateAttempt") && (localStorage.removeItem("ebe:migrateAttempt"), e.toast.showToast({
+  const t = new Oe();
+  Ne(), new Ve(t).init(), new Fe(t).init(), t.fetchPlugins(), localStorage.getItem("ebe:migrateAttempt") && (localStorage.removeItem("ebe:migrateAttempt"), e.toast.showToast({
     message: "Successfully migrated EvenBetter: Extensions to the new Caido plugin system!",
     duration: 5e3
-  })), ze(), y.info("EvenBetterExtensions initialized");
-}, Ve = "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/manifest.json", ze = async () => {
-  if (await new Promise((t) => setTimeout(t, 1e3)), !w("show-update-notifications"))
+  })), We(), L.info("EvenBetterExtensions initialized");
+}, ze = "https://raw.githubusercontent.com/bebiksior/EvenBetterExtensions/main/manifest.json", We = async () => {
+  if (await new Promise((t) => setTimeout(t, 1e3)), !v("show-update-notifications"))
     return;
-  const e = await (await fetch(Ve)).json();
-  if (e.version !== O) {
+  const e = await (await fetch(ze)).json();
+  if (e.version !== $) {
     const t = document.createElement("div");
-    t.innerHTML = "A new version of EvenBetter: Extensions is available!", t.innerHTML += `<br>Current version: ${O}`, t.innerHTML += `<br>New version: ${e.version}`, t.innerHTML += "<br><br>To update, download the latest plugin.zip file from the Releases page, in your Caido go to the Plugins page, uninstall the current version and install the new one.";
+    t.innerHTML = "A new version of EvenBetter: Extensions is available!", t.innerHTML += `<br>Current version: ${$}`, t.innerHTML += `<br>New version: ${e.version}`, t.innerHTML += "<br><br>To update, download the latest plugin.zip file from the Releases page, in your Caido go to the Plugins page, uninstall the current version and install the new one.";
     const n = m().ui.button({
       label: "Go to Releases",
       variant: "primary",
@@ -1394,5 +1440,5 @@ const O = "2.0.0", Xe = (r) => {
   }
 };
 export {
-  Xe as init
+  Ke as init
 };
