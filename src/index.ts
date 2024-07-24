@@ -10,7 +10,7 @@ import { SettingsPage } from "./pages/settings/settings";
 import { PageOpenEvent } from "@bebiks/evenbetter-api/src/events/onPageOpen";
 import { getSetting } from "@bebiks/evenbetter-api/src/storage";
 
-const CURRENT_VERSION = "2.0.0";
+const CURRENT_VERSION = "2.1.0";
 export const init = (caido: Caido) => {
   setCaidoAPI(caido);
 

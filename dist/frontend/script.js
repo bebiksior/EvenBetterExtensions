@@ -1402,7 +1402,7 @@ class Fe {
     return e.appendChild(n.render()), e;
   }
 }
-const $ = "2.0.0", Ke = (r) => {
+const $ = "2.1.0", Ke = (r) => {
   Te(r);
   const e = new Se(r, {
     manifestID: "evenbetter-extensions",
