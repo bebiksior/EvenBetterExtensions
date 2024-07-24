@@ -106,7 +106,8 @@ export class SettingsPage {
           separateWithLine: true,
           inputs: [
             { type: InputType.CHECKBOX, labelAsHTML: true, label: "<b>Show update notifications:</b> Get notified when new versions of EvenBetter: Extensions are available.", id: "show-update-notifications", defaultValue: 'true' },
-            { type: InputType.TEXT, labelAsHTML: true, label: "<b>URL to fetch extensions from:</b>", id: "extensions-url", defaultValue: this.pluginsManager.getPluginsURL() },
+            { type: InputType.TEXT, labelAsHTML: true, label: "<b>URL to fetch extensions from:</b>", id: "extensions-url", defaultValue: this.pluginsManager.getMainPluginsURL() },
+            { type: InputType.TEXT, labelAsHTML: true, label: "<b>Additional URLs (splitted by comma) to fetch extensions from:</b>", id: "additional-extensions-urls", defaultValue: "" },
           ],
         }
       ],

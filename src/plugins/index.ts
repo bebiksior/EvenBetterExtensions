@@ -23,8 +23,12 @@ export class PluginsManager {
     }
   }
 
-  getPluginsURL() {
+  getMainPluginsURL() {
     return getSetting("extensions-url") || PLUGIN_URL;
+  }
+
+  getAdditionalPluginsURLs() {
+    return getSetting("additional-extensions-urls")?.split(",") || [];
   }
 
   getPlugins() {
@@ -153,7 +157,6 @@ export class PluginsManager {
     if (!plugin.downloadUrl) return new Error("downloadUrl is required");
 
     if (!plugin.author.name) return new Error("author.name is required");
-    if (!plugin.author.email) return new Error("author.email is required");
     if (!plugin.author.url) return new Error("author.url is required");
 
     if (!Array.isArray(plugin.pluginsIDs))
@@ -200,12 +203,8 @@ export class PluginsManager {
 
   async fetchPlugins() {
     this.plugins = [];
-  
-    try {
-      const response = await fetch(this.getPluginsURL());
-      const data = await response.json();
-      logger.info(`Fetched ${data.plugins.length} plugins`);
-  
+
+    const processResponse = async (data: any) => {
       for (const pluginReference of data.plugins) {
         const pluginManifestResponse = await fetch(pluginReference.manifestURL);
         const pluginManifest = await pluginManifestResponse.json();
@@ -233,15 +232,41 @@ export class PluginsManager {
         logger.info(`Registering plugin: ${caidoPlugin.name}`);
         this.register(caidoPlugin);
       }
+    }
+  
+    try {
+      const response = await fetch(this.getMainPluginsURL());
+      const data = await response.json();
+
+      await processResponse(data);
+      if (this.getAdditionalPluginsURLs().length > 0) {
+        for (const url of this.getAdditionalPluginsURLs()) {
+          if (!url || !this.validateURL(url)) {
+            continue;
+          }
+
+          const response = await fetch(url);
+          const data = await response.json();
+          await processResponse(data);
+        }
+      }
   
       await this.checkForUpdates();
-  
     } catch (error: any) {
       logger.error(`Error fetching plugins: ${error.message}`);
       getEvenBetterAPI().toast.showToast({
         message: `Error fetching plugins: ${error.message}`,
         type: "error",
       });
+    }
+  }
+
+  private validateURL(url: string) {
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
     }
   }
 
