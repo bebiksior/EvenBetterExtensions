@@ -73,6 +73,12 @@ const pluginExpansionElement = (plugin: CaidoPlugin) => {
   aWebsite.href = plugin.author.url;
   aWebsite.textContent = plugin.author.url;
 
+  const h3Description = document.createElement("h3");
+  h3Description.textContent = "Description";
+
+  const pDescription = document.createElement("p");
+  pDescription.textContent = plugin.description;
+
   aWebsite.addEventListener("click", (event) => {
     event.preventDefault();
 
@@ -81,6 +87,9 @@ const pluginExpansionElement = (plugin: CaidoPlugin) => {
 
   divMeta.appendChild(h3Website);
   divMeta.appendChild(aWebsite);
+
+  divMeta.appendChild(h3Description);
+  divMeta.appendChild(pDescription);
 
   const divPlugins = document.createElement("div");
   divPlugins.className = "c-table-expansion__plugins";
