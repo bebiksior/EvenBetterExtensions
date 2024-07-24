@@ -3,3 +3,4 @@ test
 .DS_Store
 .vscode
 dist
+dist-zip
