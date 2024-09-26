@@ -1,3 +1,6 @@
+# UPDATE
+Caido v0.41.1 introduced Community Plugin Store. This plugin is no longer needed and will not be updated. Please use the built-in plugin store instead. I'm working on moving all plugins to the new store.
+
 # EvenBetterExtensions [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20me)](https://twitter.com/bebiksior)
 
 `EvenBetter: Extensions` allows you to quicky install and keep updated Caido extensions.
